@@ -1,7 +1,5 @@
 FROM rasa/rasa:2.8.1
 
-WORKDIR /usr/src/app
-
 COPY config.yml ./config.yml
 COPY training.yml ./training.yml
 
