@@ -1,5 +1,6 @@
 language: de
 pipeline:
+  - name: json_entity_extractor.JSONEntityExtractor
   - name: "WhitespaceTokenizer"
   - name: "RegexFeaturizer"
   - name: "CountVectorsFeaturizer"
