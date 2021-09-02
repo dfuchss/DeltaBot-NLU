@@ -1,175 +1,148 @@
 version: "2.0"
 nlu:
-- intent: clock
-  examples: |
-    - kannst du mir sagen wieviel uhr es ist?
-    - wann haben wir in der zeit?
-    - was ist die aktuelle uhrzeit
-    - was ist die aktuelle zeit?
-    - was ist unsere aktuelle zeit
-    - was zeigt die uhr
-    - wieviel uhr haben wir es?
-    - wieviel uhr ist es
-    - wieviel uhr ist es?
-    - wiviel uhr ist es?
-    - zeig mir die zeit
-- intent: news
-  examples: |
-    - bitte ein kurzes briefing
-    - briefe mich
-    - briefe mich bitte
-    - ein briefing
-    - gib mir bitte ein kurzes briefing
-    - gib mir ein briefing
-    - gib mir ein kurzes briefing
-    - gib mir mein briefing
-    - kannst du mir sagen was auf der welt passiert ist
-    - liefere mir news von gestern
-    - news
-    - was für nachrichten gibt es?
-    - was gib es für news
-    - was gibt er neues
-    - was gibt es aktuell
-    - was gibt es für news
-    - was gibt es neues
-    - was gibt es neues?
-    - was gibts neues
-    - was hast du für news?
-    - was ist denn heute alles passiert
-    - was ist heute alles passiert
-    - was ist heute in der welt passiert
-    - was ist heute passiert
-    - was sind die aktuellen news
-    - was sind die news
-    - zeig mir die aktuellen news
-    - zeig mir die news
-    - zeige mir aktuelle entwicklungen
-    - zeige mir die news
-- intent: QnA-Creator
-  examples: |
-    - wer hat dich erschaffen
-    - wer hat dich gebaut
-    - wer hat dich geschrieben
-    - wer ist dein schöpfer
-- intent: QnA-Greeting
-  examples: |
-    - hallo
-    - hallo bot
-    - hey
-    - hi
-    - sei gegrüßt
-    - sei gegrüßt bot
-    - sei gegrüßt deltabot
-- intent: QnA-Joke
-  examples: |
-    - bist du lustig
-    - bist du lustig?
-    - bist du witzig?
-    - erzähl einen witz
-    - erzähl mal einen witz
-    - erzähl mir den witz
-    - erzähl mir einen bösen witz
-    - erzähl mir einen witz
-    - erzähl nen witz
-    - erzähl rafas witz
-    - erzähle mir den sandkorn-witz
-    - erzähle mir den witz
-    - erzähle mir einen witz
-    - hau einen raus
-    - joke
-    - kennst du einen witz
-    - kennst du sandkörner
-    - sag einen witz
-    - sag mir einen witz
-    - tell me a joke
-    - was weißt du über sandkörner
-    - witz
-    - bring mich zum lachen
-    - sei bitte lustig
-    - ich will lachen
-- intent: QnA-State
-  examples: |
-    - wie geht es dir
-    - wie ist dein zustand
-    - wie ist deine verfassung
-    - alles ok soweit
-    - wie gehts denn so
-    - wie geht's denn so
-    - wie geht es denn so
-- intent: QnA-Tasks
-  examples: |
-    - help
-    - was kannst du alles
-    - was kannst du denn alles
-    - was kannst du denn alles machen
-    - was kannst du für mich tun
-    - was kannst du nochmal alles
-    - was sind deine fähigkeiten
-    - what can you do for me
-    - was kannst du
-    - was kannst du?
-    - hilfe bitte
-    - zeig mir die hilfe
-    - hilfe was kannst du
-- intent: QnA-WhoAreYou
-  examples: |
-    - wer bist Du
-    - wie heißt Du
-    - hast Du einen Namen
-    - wie soll ich Dich nennen
-- intent: cleanup
-  examples: |
-    - bitte den channel aufräumen
-    - lösche alle nachrichten von mir
-    - räume meine nachrichten auf
-    - cleanup
-    - aufräumen
-- intent: yes
-  examples: |
-    - ja
-    - jep
-    - jup
-    - yes
-- intent: no
-  examples: |
-    - nein
-    - no
-    - nope
-- intent: answer
-  examples: |
-    - ich möchte eine neue antwort eingeben
-    - neue antwort
-    - neuen witz
-    - neuen qna
-    - neues qna
-- intent: QnA-Good
-  examples: |
-    - mir geht es gut
-    - dann ists ja gut
-    - das ist schön
-    - das freut mich
-- intent: QnA-Bad
-  examples: |
-    - mir geht es nicht gut
-    - mir geht es schlecht
-    - das ist blöd
-    - das macht mich traurig
-- intent: QnA-Thanks
-  examples: |
-    - danke dir
-    - vielen lieben dank
-    - gut
-    - das hast du toll gemacht
-    - danke
-    - ich bin zufrienden mit dir
-    - das war genial
-    - das hat funktioniert
-- intent: choose
-  examples: |
-    - bitte verteile die leute
-    - zufällige auswahl
-    - ich brauche wieder eine zuordnung
-    - mach mal nen bisschen was random
-    - zufall
-    - ordne die teams zu
-    - ich brauch teams
+  - intent: clock
+    examples: |
+      - can you tell me what time it is?
+      - when do we have in time?
+      - what is the current time
+      - what is the current time?
+      - what is our current time
+      - what does the clock show
+      - what time is it?
+      - what time is it
+      - show me the time
+  - intent: news
+    examples: |
+      - please give me a short briefing
+      - brief me
+      - brief me please
+      - a briefing
+      - give me a briefing
+      - give me a short briefing
+      - give me my briefing
+      - can you tell me what happened in the world
+      - give me news from yesterday
+      - news
+      - what kind of news is there
+      - what are the news
+      - what are the latest news
+      - what is new
+      - what news do you have
+      - what happened today
+      - what happened in the world today
+      - what are the latest news
+      - what are the news
+      - show me the latest news
+      - show me the news
+      - show me the latest developments
+  - intent: QnA-Creator
+    examples: |
+      - who created you
+      - who has developed you
+      - who built you
+      - who has written you
+      - who is your creator
+  - intent: QnA-Greeting
+    examples: |
+      - hello
+      - hello bot
+      - hey
+      - hi
+      - greetings
+      - hello bot
+      - hello deltabot
+  - intent: QnA-Joke
+    examples: |
+      - are you funny
+      - are you funny?
+      - tell a joke
+      - tell me a joke
+      - tell me the joke
+      - tell me a bad joke
+      - tell me rafas joke
+      - tell me the grain of sand joke
+      - tell me a joke
+      - joke
+      - do you know a joke
+      - do you know grains of sand
+      - what do you know about grains of sand
+      - make me laugh
+      - please be funny
+      - I want to laugh
+  - intent: QnA-State
+    examples: |
+      - how are you
+      - what is your condition
+      - how is your condition
+      - everything ok so far
+      - how are you doing
+      - how is it going
+  - intent: QnA-Tasks
+    examples: |
+      - help
+      - what can you do
+      - what can you do for me
+      - what are your skills
+      - help please
+      - show me the help
+      - help what can you do
+  - intent: QnA-WhoAreYou
+    examples: |
+      - who are you
+      - what is your name
+      - do you have a name
+      - how should I call you
+  - intent: cleanup
+    examples: |
+      - please clean up the channel
+      - delete all messages from me
+      - clean up my messages
+      - cleanup
+      - clean up
+  - intent: yes
+    examples: |
+      - yep
+      - ya
+      - yup
+      - yes
+  - intent: no
+    examples: |
+      - noin
+      - no
+      - nope
+  - intent: answer
+    examples: |
+      - I would like to enter a new answer
+      - new answer
+      - new joke
+      - new qna
+  - intent: QnA-Good
+    examples: |
+      - I am well
+      - then it's good
+      - that is nice
+      - that makes me happy
+  - intent: QnA-Bad
+    examples: |
+      - I am not well
+      - I feel bad
+      - that is stupid
+      - that makes me sad
+  - intent: QnA-Thanks
+    examples: |
+      - thank you
+      - thank you very much
+      - good
+      - you did a great job
+      - I am happy with you
+      - that was great
+      - that worked
+  - intent: choose
+    examples: |
+      - please distribute the people
+      - random selection
+      - I need an assignment again
+      - do a little bit random
+      - random
+      - assign the teams
+      - I need teams
