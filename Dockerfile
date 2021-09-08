@@ -1,4 +1,4 @@
-FROM rasa/rasa:2.8.3
+FROM rasa/rasa:2.8.5
 
 COPY config.yml ./config.yml
 COPY training.yml ./training.yml
