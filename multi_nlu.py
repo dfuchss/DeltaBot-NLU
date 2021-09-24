@@ -1,5 +1,6 @@
 import re
-from typing import Dict, Any
+from threading import Lock, Thread
+from typing import Dict, Any, Union
 
 from flask import Flask, Blueprint, request, make_response
 from flask_restx import Resource, Api, fields, abort
@@ -19,16 +20,41 @@ task = api.model("task", {
 })
 
 
+def load_thread(lock: Lock, model: str, key: str, ms: Dict[str, Union[Interpreter, Lock]]):
+    lock.acquire()
+    print(f"Loading model for Locale: {key}")
+    interpreter = Interpreter.load(model)
+    ms[key] = interpreter
+    lock.release()
+
+
 def load_models():
     ms = {}
-    for lang in languages:
-        model = f"{get_model('models_' + lang)}/nlu"
-        interpreter = Interpreter.load(model)
-        ms[lang] = interpreter
+
+    models = [f"{get_model('models_' + lang)}/nlu" for lang in languages]
+
+    for idx, lang in enumerate(languages):
+        lock = Lock()
+        ms[lang] = lock
+
+        thread = Thread(target=lambda: load_thread(lock, models[idx], lang, ms))
+        thread.setDaemon(True)
+        thread.start()
+
     return ms
 
 
-models: Dict[str, Interpreter] = load_models()
+nlu_models: Dict[str, Union[Interpreter, Lock]] = load_models()
+
+
+def get_nlu(locale: str) -> Interpreter:
+    lock_or_model = nlu_models[locale]
+
+    if isinstance(lock_or_model, type(Lock())):
+        lock_or_model.acquire()
+        lock_or_model.release()
+
+    return nlu_models[locale]
 
 
 @ns.route("/")
@@ -48,7 +74,7 @@ class NLUEndpoint(Resource):
 
         if locale not in languages:
             abort(404, f"Locale {locale} not found")
-        result = models[locale].parse(text)
+        result = get_nlu(locale).parse(text)
         # print(result)
         return result
 
@@ -72,4 +98,5 @@ if __name__ == '__main__':
 
     # Production
     from waitress import serve
+
     serve(flask, host="0.0.0.0", port=5005)
