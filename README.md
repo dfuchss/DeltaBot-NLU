@@ -6,5 +6,6 @@ The NLU Unit for [DeltaBot V2](https://github.com/dfuchss/DeltaBot)
 
 - python3 with pip
 - `pip install -r requirements.txt`
-- `rasa train nlu --nlu training.yml`
-- `rasa run --enable-api -m models`
+- `rasa train nlu --config en/config.yml --nlu en/training.yml --out models_en`
+- `rasa train nlu --config de/config.yml --nlu de/training.yml --out models_de`
+- `python multi_nlu.py`
