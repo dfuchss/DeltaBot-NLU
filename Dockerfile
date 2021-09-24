@@ -1,14 +1,21 @@
-FROM rasa/rasa:2.8.7
+FROM python:3.8
 
-COPY config.yml ./config.yml
-COPY training.yml ./training.yml
-
-# For Entities
-COPY entities.json .
-COPY json_entity_extractor.py .
+WORKDIR /usr/src/multi_nlu
+COPY requirements.txt .
+RUN pip install -r requirements.txt
 
 RUN rasa telemetry disable
-RUN rasa train nlu --nlu ./training.yml
+COPY json_entity_extractor.py .
+
+# DE Model
+COPY de de
+RUN rasa train nlu --config de/config.yml --nlu de/training.yml --out models_de
+
+# EN Model
+COPY en en
+RUN rasa train nlu --config en/config.yml --nlu en/training.yml --out models_en
+
+COPY multi_nlu.py .
 
 EXPOSE 5005
-ENTRYPOINT rasa run --enable-api -m models
+ENTRYPOINT python multi_nlu.py

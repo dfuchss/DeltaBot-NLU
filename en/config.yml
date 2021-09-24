@@ -1,6 +1,7 @@
 language: en
 pipeline:
   - name: json_entity_extractor.JSONEntityExtractor
+    path: "./en/entities.json"
   - name: "WhitespaceTokenizer"
   - name: "RegexFeaturizer"
   - name: "CountVectorsFeaturizer"
@@ -9,7 +10,7 @@ pipeline:
     min_ngram: 1
     max_ngram: 4
   - name: DIETClassifier
-    epochs: 500
+    epochs: 50
     hidden_layers_sizes:
       text: [ 256, 128 ]
     number_of_transformer_layers: 2

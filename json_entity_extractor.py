@@ -1,11 +1,9 @@
 from json import loads
-from os.path import exists
+from os.path import exists, abspath
 from re import search
 from typing import Dict, Optional, Text, Any, List
 
 from rasa.nlu.extractors.extractor import EntityExtractor
-
-_entities = "./entities.json"
 
 
 class Entity:
@@ -61,13 +59,19 @@ class JSONEntityExtractor(EntityExtractor):
     def __init__(self, parameters: Optional[Dict[Text, Any]]):
         super().__init__(parameters)
 
-        if exists(_entities):
-            with open(_entities, encoding="utf-8-sig") as ef:
+        if "path" in parameters.keys():
+            self._path = parameters["path"]
+        else:
+            self._path = "./entities.json"
+
+        if exists(self._path):
+            with open(self._path, encoding="utf-8-sig") as ef:
                 self.entity_model = self._load_entities_from_json(loads(ef.read()))
         else:
             self.entity_model = EntityModel([])
 
     def process(self, message, **kwargs: Any) -> None:
+        # print(f"Process JSON Entities with ... {abspath(self._path)}")
         content = message.get("text")
         entities = self._recognize_entities(content)
         message.set("entities", message.get("entities", []) + entities, add_to_output=True)
