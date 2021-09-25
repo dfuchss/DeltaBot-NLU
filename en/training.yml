@@ -92,13 +92,6 @@ nlu:
       - what is your name
       - do you have a name
       - how should I call you
-  - intent: cleanup
-    examples: |
-      - please clean up the channel
-      - delete all messages from me
-      - clean up my messages
-      - cleanup
-      - clean up
   - intent: yes
     examples: |
       - yep
@@ -137,12 +130,3 @@ nlu:
       - I am happy with you
       - that was great
       - that worked
-  - intent: choose
-    examples: |
-      - please distribute the people
-      - random selection
-      - I need an assignment again
-      - do a little bit random
-      - random
-      - assign the teams
-      - I need teams
