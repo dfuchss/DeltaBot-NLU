@@ -5,19 +5,35 @@
       "entities": [
         {
           "name": "IT",
-          "values": ["it", "heise", "heise.de", "technik"]
+          "values": [
+            "it",
+            "heise",
+            "heise.de",
+            "technik"
+          ]
         },
         {
           "name": "Sport",
-          "values": ["sport", "fu\u00dfball", "darts"]
+          "values": [
+            "sport",
+            "fu\u00dfball",
+            "darts"
+          ]
         },
         {
-          "name": "Allgemein",
-          "values": ["allgemein", "welt", "alles"]
+          "name": "General",
+          "values": [
+            "allgemein",
+            "welt",
+            "alles"
+          ]
         },
         {
           "name": "Netcup",
-          "values": ["netcup", "webhosting"]
+          "values": [
+            "netcup",
+            "webhosting"
+          ]
         }
       ]
     },
@@ -26,15 +42,20 @@
       "entities": [
         {
           "name": "user",
-          "values": ["user", "users", "benutzer", "nutzer"]
+          "values": [
+            "user",
+            "users",
+            "benutzer",
+            "nutzer"
+          ]
         },
         {
-          "name": "ich",
-          "values": ["ich", "mich", "mein"]
-        },
-        {
-          "name": "sie",
-          "values": ["sie"]
+          "name": "I",
+          "values": [
+            "ich",
+            "mich",
+            "mein"
+          ]
         }
       ]
     }
