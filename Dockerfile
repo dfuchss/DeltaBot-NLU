@@ -1,4 +1,4 @@
-FROM python:3.8
+FROM python:3.10.0
 
 WORKDIR /usr/src/multi_nlu
 COPY requirements.txt .
