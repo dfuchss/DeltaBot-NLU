@@ -1,4 +1,4 @@
 rasa==2.8.7
 flask==2.0.3
 flask_restx==0.5.1
-waitress==2.0.0
+waitress==2.1.0
