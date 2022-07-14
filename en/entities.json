@@ -29,13 +29,6 @@
             "world",
             "all"
           ]
-        },
-        {
-          "name": "Netcup",
-          "values": [
-            "netcup",
-            "webhosting"
-          ]
         }
       ]
     },

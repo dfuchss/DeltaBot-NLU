@@ -24,15 +24,9 @@
           "name": "General",
           "values": [
             "allgemein",
+            "allgemeines",
             "welt",
             "alles"
-          ]
-        },
-        {
-          "name": "Netcup",
-          "values": [
-            "netcup",
-            "webhosting"
           ]
         }
       ]
