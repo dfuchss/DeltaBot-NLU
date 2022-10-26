@@ -1,5 +1,5 @@
 # Workaround https://stackoverflow.com/questions/73105877/importerror-cannot-import-name-parse-rule-from-werkzeug-routing
-werkzeug==2.1.2
+werkzeug==2.2.2
 flask==2.1.2
 
 rasa==2.8.7
