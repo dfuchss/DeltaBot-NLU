@@ -3,6 +3,6 @@ werkzeug==2.1.2
 flask==2.1.2
 
 rasa==2.8.7
-flask_restx==0.5.1
+flask_restx==1.0.3
 waitress==2.1.2
 
