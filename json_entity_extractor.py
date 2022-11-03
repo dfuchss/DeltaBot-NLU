@@ -1,9 +1,14 @@
 from json import loads
-from os.path import exists, abspath
+from os.path import exists
 from re import search
-from typing import Dict, Optional, Text, Any, List
+from typing import Dict, Text, Any, List
 
-from rasa.nlu.extractors.extractor import EntityExtractor
+from rasa.engine.graph import GraphComponent, ExecutionContext
+from rasa.engine.recipes.default_recipe import DefaultV1Recipe
+from rasa.engine.storage.resource import Resource
+from rasa.engine.storage.storage import ModelStorage
+from rasa.nlu.extractors.extractor import EntityExtractorMixin
+from rasa.shared.nlu.training_data.message import Message
 
 
 class Entity:
@@ -55,9 +60,11 @@ class EntityModel:
         self.groups = groups
 
 
-class JSONEntityExtractor(EntityExtractor):
-    def __init__(self, parameters: Optional[Dict[Text, Any]]):
-        super().__init__(parameters)
+@DefaultV1Recipe.register(DefaultV1Recipe.ComponentType.ENTITY_EXTRACTOR, is_trainable=False)
+class JSONEntityExtractor(GraphComponent, EntityExtractorMixin):
+
+    def __init__(self, parameters: Dict[Text, Any]):
+        super(JSONEntityExtractor, self).__init__()
 
         if "path" in parameters.keys():
             self._path = parameters["path"]
@@ -70,11 +77,17 @@ class JSONEntityExtractor(EntityExtractor):
         else:
             self.entity_model = EntityModel([])
 
-    def process(self, message, **kwargs: Any) -> None:
+    @classmethod
+    def create(cls, config: Dict[Text, Any], model_storage: ModelStorage, resource: Resource, execution_context: ExecutionContext) -> GraphComponent:
+        return cls(config)
+
+    def process(self, messages: List[Message]) -> List[Message]:
         # print(f"Process JSON Entities with ... {abspath(self._path)}")
-        content = message.get("text")
-        entities = self._recognize_entities(content)
-        message.set("entities", message.get("entities", []) + entities, add_to_output=True)
+        for message in messages:
+            content = message.get("text")
+            entities = self._recognize_entities(content)
+            message.set("entities", message.get("entities", []) + entities, add_to_output=True)
+        return messages
 
     def _recognize_entities(self, content: str) -> List[dict]:
         """

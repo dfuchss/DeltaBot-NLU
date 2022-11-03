@@ -1,11 +1,12 @@
+import asyncio
 import re
 from threading import Lock, Thread
 from typing import Dict, Any, Union
 
 from flask import Flask, Blueprint, request, make_response
 from flask_restx import Resource, Api, fields, abort
-from rasa.model import get_model
-from rasa.nlu.model import Interpreter
+from rasa.core.agent import Agent
+from rasa.model import get_local_model
 
 languages = ["de", "en"]
 
@@ -20,10 +21,10 @@ task = api.model("task", {
 })
 
 
-def load_thread(lock: Lock, model: str, key: str, ms: Dict[str, Union[Interpreter, Lock]]):
+def load_thread(lock: Lock, model: str, key: str, ms: Dict[str, Union[Agent, Lock]]):
     lock.acquire()
     print(f"Loading model for Locale: {key}")
-    interpreter = Interpreter.load(model)
+    interpreter = Agent.load(model)
     ms[key] = interpreter
     lock.release()
 
@@ -31,7 +32,7 @@ def load_thread(lock: Lock, model: str, key: str, ms: Dict[str, Union[Interprete
 def load_models():
     ms = {}
 
-    models = [f"{get_model('models_' + lang)}/nlu" for lang in languages]
+    models = [f"{get_local_model('models_' + lang)}" for lang in languages]
 
     for idx, lang in enumerate(languages):
         lock = Lock()
@@ -44,10 +45,10 @@ def load_models():
     return ms
 
 
-nlu_models: Dict[str, Union[Interpreter, Lock]] = load_models()
+nlu_models: Dict[str, Union[Agent, Lock]] = load_models()
 
 
-def get_nlu(locale: str) -> Interpreter:
+def get_nlu(locale: str) -> Agent:
     lock_or_model = nlu_models[locale]
 
     if isinstance(lock_or_model, type(Lock())):
@@ -74,7 +75,12 @@ class NLUEndpoint(Resource):
 
         if locale not in languages:
             abort(404, f"Locale {locale} not found")
-        result = get_nlu(locale).parse(text)
+
+        loop = asyncio.new_event_loop()
+        coroutine_result = get_nlu(locale).parse_message(text)
+        result = loop.run_until_complete(coroutine_result)
+        loop.close()
+
         # print(result)
         return result
 
