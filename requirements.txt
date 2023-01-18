@@ -1,6 +1,6 @@
 # Workaround https://stackoverflow.com/questions/73105877/importerror-cannot-import-name-parse-rule-from-werkzeug-routing
 flask==2.2.2
 rasa==3.3.0
-flask_restx==1.0.3
+flask_restx==1.0.5
 waitress==2.1.2
 
