@@ -1,3 +1,5 @@
+⚠️ Archived because not needed for current version of DeltaBot ⚠️
+
 # DeltaBot NLU (Version 2)
 
 The NLU Unit for [DeltaBot V2](https://github.com/dfuchss/DeltaBot)
